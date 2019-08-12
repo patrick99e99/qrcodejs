@@ -524,15 +524,15 @@ var QRCode;
     qrCode.addData(text);
     qrCode.make();
 
-    var cells = qrCode.getModuleCount();
-    var border = [{ start: 0, end: cells + 2 }];
+    var modules = qrCode.getModuleCount();
+    var border = [{ start: 0, end: modules + 2 }];
     var sideBorder = 1;
     var output = [border];
 
-    for (var row = 0; row < cells; row++) {
+    for (var row = 0; row < modules; row++) {
       var rowValues = [];
       rowValues.push(sideBorder);
-      for (var col = 0; col < cells; col++) {
+      for (var col = 0; col < modules; col++) {
         rowValues.push(Number(!qrCode.isDark(row, col)));
       }
       rowValues.push(sideBorder);
@@ -556,7 +556,7 @@ var QRCode;
     }
 
     output.push(border);
-    return output;
+    return { modules: output[0][0].end, data: output };
   };
 
 	/**
